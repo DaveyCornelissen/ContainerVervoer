@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace ContainerTransport
     {
         private Ship ship;
 
-        public List<Container> TotalContainers { get; set; } = new List<Container>();
+        public ObservableCollection<Container> TotalContainers { get; set; } = new ObservableCollection<Container>();
 
         public Logic(int maxWeight)
         {
@@ -19,15 +20,16 @@ namespace ContainerTransport
 
         public void AddContainer(int weight, bool standard, bool valuable, bool Cooled)
         {
-            Container newContainer = new Container
-            {
-                Weight = weight,
-                Standard = standard,
-                Valuable = valuable,
-                Cooled = Cooled
-            };
+            
+        }
 
-            TotalContainers.Add(newContainer);
+        public void RemoveContainer(object index)
+        {
+            if (index is Container)
+            {
+                TotalContainers.Remove((Container)index);
+            }
+            
         }
     }
 }

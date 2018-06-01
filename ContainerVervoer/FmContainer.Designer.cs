@@ -45,17 +45,27 @@
             this.lbContainerSection2 = new System.Windows.Forms.ListBox();
             this.lbContainerSection1 = new System.Windows.Forms.ListBox();
             this.gpContainerAdd = new System.Windows.Forms.GroupBox();
+            this.rbCooled = new System.Windows.Forms.RadioButton();
+            this.rbValuable = new System.Windows.Forms.RadioButton();
+            this.rbStandard = new System.Windows.Forms.RadioButton();
+            this.btnRemoveContainer = new System.Windows.Forms.Button();
             this.btnAddContainer = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.tbSetContainerWeight = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.lbContainerList = new System.Windows.Forms.ListBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.lbProgramLog = new System.Windows.Forms.ListBox();
-            this.rbStandard = new System.Windows.Forms.RadioButton();
-            this.rbValuable = new System.Windows.Forms.RadioButton();
-            this.rbCooled = new System.Windows.Forms.RadioButton();
-            this.lbShipInfo = new System.Windows.Forms.ListBox();
+            this.rtbProgramLog = new System.Windows.Forms.RichTextBox();
+            this.lblShipBalance = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lblTotalContainerWeight = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.lblTotalContainers = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.lblShipMinWeight = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.lblShipMaxWeight = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.gpContainerAdd.SuspendLayout();
@@ -219,6 +229,7 @@
             this.gpContainerAdd.Controls.Add(this.rbCooled);
             this.gpContainerAdd.Controls.Add(this.rbValuable);
             this.gpContainerAdd.Controls.Add(this.rbStandard);
+            this.gpContainerAdd.Controls.Add(this.btnRemoveContainer);
             this.gpContainerAdd.Controls.Add(this.btnAddContainer);
             this.gpContainerAdd.Controls.Add(this.label2);
             this.gpContainerAdd.Controls.Add(this.tbSetContainerWeight);
@@ -228,6 +239,49 @@
             this.gpContainerAdd.TabIndex = 2;
             this.gpContainerAdd.TabStop = false;
             this.gpContainerAdd.Text = "Create Container";
+            // 
+            // rbCooled
+            // 
+            this.rbCooled.AutoSize = true;
+            this.rbCooled.Location = new System.Drawing.Point(192, 68);
+            this.rbCooled.Name = "rbCooled";
+            this.rbCooled.Size = new System.Drawing.Size(58, 17);
+            this.rbCooled.TabIndex = 6;
+            this.rbCooled.TabStop = true;
+            this.rbCooled.Text = "Cooled";
+            this.rbCooled.UseVisualStyleBackColor = true;
+            // 
+            // rbValuable
+            // 
+            this.rbValuable.AutoSize = true;
+            this.rbValuable.Location = new System.Drawing.Point(101, 68);
+            this.rbValuable.Name = "rbValuable";
+            this.rbValuable.Size = new System.Drawing.Size(66, 17);
+            this.rbValuable.TabIndex = 6;
+            this.rbValuable.TabStop = true;
+            this.rbValuable.Text = "Valuable";
+            this.rbValuable.UseVisualStyleBackColor = true;
+            // 
+            // rbStandard
+            // 
+            this.rbStandard.AutoSize = true;
+            this.rbStandard.Location = new System.Drawing.Point(10, 68);
+            this.rbStandard.Name = "rbStandard";
+            this.rbStandard.Size = new System.Drawing.Size(68, 17);
+            this.rbStandard.TabIndex = 6;
+            this.rbStandard.TabStop = true;
+            this.rbStandard.Text = "Standard";
+            this.rbStandard.UseVisualStyleBackColor = true;
+            // 
+            // btnRemoveContainer
+            // 
+            this.btnRemoveContainer.Location = new System.Drawing.Point(125, 89);
+            this.btnRemoveContainer.Name = "btnRemoveContainer";
+            this.btnRemoveContainer.Size = new System.Drawing.Size(75, 23);
+            this.btnRemoveContainer.TabIndex = 4;
+            this.btnRemoveContainer.Text = "Remove";
+            this.btnRemoveContainer.UseVisualStyleBackColor = true;
+            this.btnRemoveContainer.Click += new System.EventHandler(this.btnRemoveContainer_Click);
             // 
             // btnAddContainer
             // 
@@ -252,6 +306,7 @@
             // 
             this.tbSetContainerWeight.Location = new System.Drawing.Point(10, 37);
             this.tbSetContainerWeight.Name = "tbSetContainerWeight";
+            this.tbSetContainerWeight.ReadOnly = true;
             this.tbSetContainerWeight.Size = new System.Drawing.Size(245, 20);
             this.tbSetContainerWeight.TabIndex = 0;
             // 
@@ -276,8 +331,17 @@
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.lbShipInfo);
-            this.groupBox5.Controls.Add(this.lbProgramLog);
+            this.groupBox5.Controls.Add(this.rtbProgramLog);
+            this.groupBox5.Controls.Add(this.lblShipBalance);
+            this.groupBox5.Controls.Add(this.label5);
+            this.groupBox5.Controls.Add(this.lblTotalContainerWeight);
+            this.groupBox5.Controls.Add(this.label10);
+            this.groupBox5.Controls.Add(this.lblTotalContainers);
+            this.groupBox5.Controls.Add(this.label8);
+            this.groupBox5.Controls.Add(this.lblShipMinWeight);
+            this.groupBox5.Controls.Add(this.label6);
+            this.groupBox5.Controls.Add(this.lblShipMaxWeight);
+            this.groupBox5.Controls.Add(this.label4);
             this.groupBox5.Location = new System.Drawing.Point(563, 13);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(295, 205);
@@ -285,54 +349,105 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Program Log";
             // 
-            // lbProgramLog
+            // rtbProgramLog
             // 
-            this.lbProgramLog.FormattingEnabled = true;
-            this.lbProgramLog.Location = new System.Drawing.Point(7, 109);
-            this.lbProgramLog.Name = "lbProgramLog";
-            this.lbProgramLog.Size = new System.Drawing.Size(282, 82);
-            this.lbProgramLog.TabIndex = 0;
+            this.rtbProgramLog.ForeColor = System.Drawing.Color.Red;
+            this.rtbProgramLog.Location = new System.Drawing.Point(6, 103);
+            this.rtbProgramLog.Name = "rtbProgramLog";
+            this.rtbProgramLog.ReadOnly = true;
+            this.rtbProgramLog.Size = new System.Drawing.Size(283, 96);
+            this.rtbProgramLog.TabIndex = 2;
+            this.rtbProgramLog.Text = "";
             // 
-            // rbStandard
+            // lblShipBalance
             // 
-            this.rbStandard.AutoSize = true;
-            this.rbStandard.Location = new System.Drawing.Point(10, 68);
-            this.rbStandard.Name = "rbStandard";
-            this.rbStandard.Size = new System.Drawing.Size(68, 17);
-            this.rbStandard.TabIndex = 6;
-            this.rbStandard.TabStop = true;
-            this.rbStandard.Text = "Standard";
-            this.rbStandard.UseVisualStyleBackColor = true;
+            this.lblShipBalance.AutoSize = true;
+            this.lblShipBalance.Location = new System.Drawing.Point(77, 67);
+            this.lblShipBalance.Name = "lblShipBalance";
+            this.lblShipBalance.Size = new System.Drawing.Size(16, 13);
+            this.lblShipBalance.TabIndex = 1;
+            this.lblShipBalance.Text = "...";
             // 
-            // rbValuable
+            // label5
             // 
-            this.rbValuable.AutoSize = true;
-            this.rbValuable.Location = new System.Drawing.Point(101, 68);
-            this.rbValuable.Name = "rbValuable";
-            this.rbValuable.Size = new System.Drawing.Size(66, 17);
-            this.rbValuable.TabIndex = 6;
-            this.rbValuable.TabStop = true;
-            this.rbValuable.Text = "Valuable";
-            this.rbValuable.UseVisualStyleBackColor = true;
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(130, 46);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(115, 13);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "Total container weight:";
             // 
-            // rbCooled
+            // lblTotalContainerWeight
             // 
-            this.rbCooled.AutoSize = true;
-            this.rbCooled.Location = new System.Drawing.Point(192, 68);
-            this.rbCooled.Name = "rbCooled";
-            this.rbCooled.Size = new System.Drawing.Size(58, 17);
-            this.rbCooled.TabIndex = 6;
-            this.rbCooled.TabStop = true;
-            this.rbCooled.Text = "Cooled";
-            this.rbCooled.UseVisualStyleBackColor = true;
+            this.lblTotalContainerWeight.AutoSize = true;
+            this.lblTotalContainerWeight.Location = new System.Drawing.Point(242, 46);
+            this.lblTotalContainerWeight.Name = "lblTotalContainerWeight";
+            this.lblTotalContainerWeight.Size = new System.Drawing.Size(16, 13);
+            this.lblTotalContainerWeight.TabIndex = 1;
+            this.lblTotalContainerWeight.Text = "...";
             // 
-            // lbShipInfo
+            // label10
             // 
-            this.lbShipInfo.FormattingEnabled = true;
-            this.lbShipInfo.Location = new System.Drawing.Point(7, 19);
-            this.lbShipInfo.Name = "lbShipInfo";
-            this.lbShipInfo.Size = new System.Drawing.Size(282, 82);
-            this.lbShipInfo.TabIndex = 0;
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(6, 67);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(73, 13);
+            this.label10.TabIndex = 1;
+            this.label10.Text = "Ship Balance:";
+            // 
+            // lblTotalContainers
+            // 
+            this.lblTotalContainers.AutoSize = true;
+            this.lblTotalContainers.Location = new System.Drawing.Point(242, 23);
+            this.lblTotalContainers.Name = "lblTotalContainers";
+            this.lblTotalContainers.Size = new System.Drawing.Size(16, 13);
+            this.lblTotalContainers.TabIndex = 1;
+            this.lblTotalContainers.Text = "...";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(159, 23);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(86, 13);
+            this.label8.TabIndex = 1;
+            this.label8.Text = "Total containers:";
+            // 
+            // lblShipMinWeight
+            // 
+            this.lblShipMinWeight.AutoSize = true;
+            this.lblShipMinWeight.Location = new System.Drawing.Point(90, 46);
+            this.lblShipMinWeight.Name = "lblShipMinWeight";
+            this.lblShipMinWeight.Size = new System.Drawing.Size(16, 13);
+            this.lblShipMinWeight.TabIndex = 1;
+            this.lblShipMinWeight.Text = "...";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 46);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(84, 13);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "Ship min weight:";
+            // 
+            // lblShipMaxWeight
+            // 
+            this.lblShipMaxWeight.AutoSize = true;
+            this.lblShipMaxWeight.Location = new System.Drawing.Point(90, 23);
+            this.lblShipMaxWeight.Name = "lblShipMaxWeight";
+            this.lblShipMaxWeight.Size = new System.Drawing.Size(16, 13);
+            this.lblShipMaxWeight.TabIndex = 1;
+            this.lblShipMaxWeight.Text = "...";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 23);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(87, 13);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "Ship max weight:";
             // 
             // FmContainer
             // 
@@ -354,6 +469,7 @@
             this.gpContainerAdd.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -380,14 +496,24 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.ListBox lbContainerList;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.ListBox lbProgramLog;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnClearAll;
         private System.Windows.Forms.RadioButton rbCooled;
         private System.Windows.Forms.RadioButton rbValuable;
         private System.Windows.Forms.RadioButton rbStandard;
-        private System.Windows.Forms.ListBox lbShipInfo;
+        private System.Windows.Forms.Label lblTotalContainerWeight;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lblTotalContainers;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblShipMinWeight;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblShipMaxWeight;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblShipBalance;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btnRemoveContainer;
+        private System.Windows.Forms.RichTextBox rtbProgramLog;
     }
 }
 
