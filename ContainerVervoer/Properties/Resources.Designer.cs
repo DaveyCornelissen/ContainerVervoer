@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ContainerVervoer.Properties
+namespace ContainerTransport.Properties
 {
 
 
