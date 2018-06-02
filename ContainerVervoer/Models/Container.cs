@@ -8,11 +8,11 @@ namespace ContainerTransport
 {
     public class Container
     {
-        public int MaxWeight { get; private set; }
+        public decimal MaxWeight { get; private set; }
 
-        public int MinWeight { get; private set; }
+        public decimal MinWeight { get; private set; }
 
-        public int Weight { get; set; }
+        public decimal Weight { get; set; }
 
         public bool Standard { get; set; }
 
@@ -28,7 +28,8 @@ namespace ContainerTransport
 
         public override string ToString()
         {
-            return "Container weight: "+ Weight +" Standard: "+ Standard +" Valuable: "+ Valuable +" Cooled: "+ Cooled;
+            return "Container weight: " + Weight + " Standard: " + Standard + " Valuable: " + Valuable + " Cooled: " +
+                   Cooled;
         }
     }
 }

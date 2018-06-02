@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.nbShipWeight = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.btnStart = new System.Windows.Forms.Button();
             this.btnClearAll = new System.Windows.Forms.Button();
             this.btnSetShip = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.tbShipMaxWeight = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lbContainerSection7 = new System.Windows.Forms.ListBox();
             this.lbContainerSection8 = new System.Windows.Forms.ListBox();
@@ -45,13 +45,13 @@
             this.lbContainerSection2 = new System.Windows.Forms.ListBox();
             this.lbContainerSection1 = new System.Windows.Forms.ListBox();
             this.gpContainerAdd = new System.Windows.Forms.GroupBox();
+            this.nbContainerWeight = new System.Windows.Forms.NumericUpDown();
             this.rbCooled = new System.Windows.Forms.RadioButton();
             this.rbValuable = new System.Windows.Forms.RadioButton();
             this.rbStandard = new System.Windows.Forms.RadioButton();
             this.btnRemoveContainer = new System.Windows.Forms.Button();
             this.btnAddContainer = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.tbSetContainerWeight = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.lbContainerList = new System.Windows.Forms.ListBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
@@ -67,26 +67,45 @@
             this.lblShipMaxWeight = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nbShipWeight)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.gpContainerAdd.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nbContainerWeight)).BeginInit();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.nbShipWeight);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.btnStart);
             this.groupBox1.Controls.Add(this.btnClearAll);
             this.groupBox1.Controls.Add(this.btnSetShip);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.tbShipMaxWeight);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(292, 81);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Create Ship";
+            // 
+            // nbShipWeight
+            // 
+            this.nbShipWeight.Location = new System.Drawing.Point(72, 20);
+            this.nbShipWeight.Maximum = new decimal(new int[] {
+            1200000,
+            0,
+            0,
+            0});
+            this.nbShipWeight.Name = "nbShipWeight";
+            this.nbShipWeight.Size = new System.Drawing.Size(120, 20);
+            this.nbShipWeight.TabIndex = 7;
+            this.nbShipWeight.Value = new decimal(new int[] {
+            1200000,
+            0,
+            0,
+            0});
             // 
             // label3
             // 
@@ -105,6 +124,7 @@
             this.btnStart.TabIndex = 5;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // btnClearAll
             // 
@@ -114,6 +134,7 @@
             this.btnClearAll.TabIndex = 4;
             this.btnClearAll.Text = "Clear all";
             this.btnClearAll.UseVisualStyleBackColor = true;
+            this.btnClearAll.Click += new System.EventHandler(this.btnClearAll_Click);
             // 
             // btnSetShip
             // 
@@ -133,13 +154,6 @@
             this.label1.Size = new System.Drawing.Size(59, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "Weight kg:";
-            // 
-            // tbShipMaxWeight
-            // 
-            this.tbShipMaxWeight.Location = new System.Drawing.Point(68, 17);
-            this.tbShipMaxWeight.Name = "tbShipMaxWeight";
-            this.tbShipMaxWeight.Size = new System.Drawing.Size(132, 20);
-            this.tbShipMaxWeight.TabIndex = 1;
             // 
             // groupBox2
             // 
@@ -226,19 +240,41 @@
             // 
             // gpContainerAdd
             // 
+            this.gpContainerAdd.Controls.Add(this.nbContainerWeight);
             this.gpContainerAdd.Controls.Add(this.rbCooled);
             this.gpContainerAdd.Controls.Add(this.rbValuable);
             this.gpContainerAdd.Controls.Add(this.rbStandard);
             this.gpContainerAdd.Controls.Add(this.btnRemoveContainer);
             this.gpContainerAdd.Controls.Add(this.btnAddContainer);
             this.gpContainerAdd.Controls.Add(this.label2);
-            this.gpContainerAdd.Controls.Add(this.tbSetContainerWeight);
             this.gpContainerAdd.Location = new System.Drawing.Point(12, 100);
             this.gpContainerAdd.Name = "gpContainerAdd";
             this.gpContainerAdd.Size = new System.Drawing.Size(292, 118);
             this.gpContainerAdd.TabIndex = 2;
             this.gpContainerAdd.TabStop = false;
             this.gpContainerAdd.Text = "Create Container";
+            // 
+            // nbContainerWeight
+            // 
+            this.nbContainerWeight.Location = new System.Drawing.Point(83, 19);
+            this.nbContainerWeight.Maximum = new decimal(new int[] {
+            30000,
+            0,
+            0,
+            0});
+            this.nbContainerWeight.Minimum = new decimal(new int[] {
+            4000,
+            0,
+            0,
+            0});
+            this.nbContainerWeight.Name = "nbContainerWeight";
+            this.nbContainerWeight.Size = new System.Drawing.Size(120, 20);
+            this.nbContainerWeight.TabIndex = 7;
+            this.nbContainerWeight.Value = new decimal(new int[] {
+            30000,
+            0,
+            0,
+            0});
             // 
             // rbCooled
             // 
@@ -247,7 +283,6 @@
             this.rbCooled.Name = "rbCooled";
             this.rbCooled.Size = new System.Drawing.Size(58, 17);
             this.rbCooled.TabIndex = 6;
-            this.rbCooled.TabStop = true;
             this.rbCooled.Text = "Cooled";
             this.rbCooled.UseVisualStyleBackColor = true;
             // 
@@ -258,13 +293,13 @@
             this.rbValuable.Name = "rbValuable";
             this.rbValuable.Size = new System.Drawing.Size(66, 17);
             this.rbValuable.TabIndex = 6;
-            this.rbValuable.TabStop = true;
             this.rbValuable.Text = "Valuable";
             this.rbValuable.UseVisualStyleBackColor = true;
             // 
             // rbStandard
             // 
             this.rbStandard.AutoSize = true;
+            this.rbStandard.Checked = true;
             this.rbStandard.Location = new System.Drawing.Point(10, 68);
             this.rbStandard.Name = "rbStandard";
             this.rbStandard.Size = new System.Drawing.Size(68, 17);
@@ -301,14 +336,6 @@
             this.label2.Size = new System.Drawing.Size(70, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Weight in kg:";
-            // 
-            // tbSetContainerWeight
-            // 
-            this.tbSetContainerWeight.Location = new System.Drawing.Point(10, 37);
-            this.tbSetContainerWeight.Name = "tbSetContainerWeight";
-            this.tbSetContainerWeight.ReadOnly = true;
-            this.tbSetContainerWeight.Size = new System.Drawing.Size(245, 20);
-            this.tbSetContainerWeight.TabIndex = 0;
             // 
             // groupBox4
             // 
@@ -464,9 +491,11 @@
             this.Text = "Container Transportation";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nbShipWeight)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.gpContainerAdd.ResumeLayout(false);
             this.gpContainerAdd.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nbContainerWeight)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
@@ -477,7 +506,6 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox tbShipMaxWeight;
         private System.Windows.Forms.Button btnSetShip;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox2;
@@ -491,7 +519,6 @@
         private System.Windows.Forms.ListBox lbContainerSection6;
         private System.Windows.Forms.GroupBox gpContainerAdd;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox tbSetContainerWeight;
         private System.Windows.Forms.Button btnAddContainer;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.ListBox lbContainerList;
@@ -514,6 +541,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnRemoveContainer;
         private System.Windows.Forms.RichTextBox rtbProgramLog;
+        private System.Windows.Forms.NumericUpDown nbShipWeight;
+        private System.Windows.Forms.NumericUpDown nbContainerWeight;
     }
 }
 

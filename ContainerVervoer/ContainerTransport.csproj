@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExceptionHandler.cs" />
     <Compile Include="Models\Container.cs" />
     <Compile Include="FmContainer.cs">
       <SubType>Form</SubType>
@@ -53,6 +54,7 @@
       <DependentUpon>FmContainer.cs</DependentUpon>
     </Compile>
     <Compile Include="Logic.cs" />
+    <Compile Include="Models\Selection.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Ship.cs" />

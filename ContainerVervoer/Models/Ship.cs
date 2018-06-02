@@ -3,34 +3,42 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ContainerVervoer.Models;
 
 namespace ContainerTransport
 {
     public class Ship
     {
-        public int MaxWeight { get; private set; }
+        public decimal MaxWeight { get; private set; }
 
-        public int Balance { get; set; }
+        public decimal MinWeight { get; private set; }
 
-        public List<Container> Section1 { get; set; }
+        public decimal Balance { get; set; }
 
-        public List<Container> Section2 { get; set; }
+        public List<Selection> Selections { get; set; } = new List<Selection>();
 
-        public List<Container> Section3 { get; set; }
 
-        public List<Container> Section4 { get; set; }
-
-        public List<Container> Section5 { get; set; }
-
-        public List<Container> Section6 { get; set; }
-
-        public List<Container> Section7 { get; set; }
-
-        public List<Container> Section8 { get; set; }
-
-        public Ship(int maxWeight)
+        public Ship(decimal maxWeight, int totalSelections)
         {
             MaxWeight = maxWeight;
+            MinWeight = MaxWeight / 2;
+
+            CreateSelections(totalSelections);
         }
+
+        //create selections to the amount given by creating a ship
+        private void CreateSelections(int total)
+        {
+            for (int i = 0; i < total; i++)
+            {
+                Selection selection = new Selection
+                {
+                    Id = i
+                };
+
+                Selections.Add(selection);
+            }
+        }
+    
     }
 }

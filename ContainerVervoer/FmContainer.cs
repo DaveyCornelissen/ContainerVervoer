@@ -15,69 +15,44 @@ namespace ContainerTransport
     {
         private Logic logicServices;
 
-        private List<Container> visualContainerList = new List<Container>();
-
         public FmContainer()
         {
             InitializeComponent();
+
+            //prevent not allowed actions
+            btnAddContainer.Enabled = false;
+            btnStart.Enabled = false;
         }
 
         private void btnSetShip_Click(object sender, EventArgs e)
         {
-            int shipWeight = tbShipMaxWeight.Text == "" ? 0 : Convert.ToInt32(tbShipMaxWeight.Text);
+            logicServices = new Logic(nbShipWeight.Value);
 
-            if (shipWeight > 12000000)
-            {
-                rtbProgramLog.Text = String.Format("Ship frame cant handel more than {0} kg! maximum weight of this schip is 12000.000 kg.", shipWeight);
-            }
-            else
-            {
-                logicServices = new Logic(shipWeight);
-            }
+            btnAddContainer.Enabled = true;
+            btnStart.Enabled = true;
         }
 
         private void btnAddContainer_Click(object sender, EventArgs e)
         {
+            //add containers to logicServices list
+            logicServices.AddContainer(nbContainerWeight.Value, rbStandard.Checked, rbValuable.Checked, rbCooled.Checked);
 
-            int ContainerWeight = tbSetContainerWeight.Text == "" ? 0 : Convert.ToInt32(tbSetContainerWeight.Text);
-
-
-
-            if (!(ContainerWeight <= 4000 || ContainerWeight >= 30000))
-            {
-                Container newContainer = new Container
-                {
-                    Weight = ContainerWeight,
-                    Standard = rbStandard.Checked,
-                    Valuable = rbValuable.Checked,
-                    Cooled = rbCooled.Checked
-                };
-
-                //add containers to logicServices list
-                logicServices.TotalContainers.Add(newContainer);
-
-                //add to visual listbox
-                visualContainerList.Add(newContainer);
-
-                //update listbox total containers
-                lbContainerUpdate();
-            }
-            else
-            {
-                rtbProgramLog.Text = "Container weight is out of range it needs to be beteen 4000 & 30000 kg!";
-            }
-
-            
+            //update listbox total containers
+            lbContainerUpdate();
         }
 
+        /// <summary>
+        /// Remove the container from the container list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnRemoveContainer_Click(object sender, EventArgs e)
         {
             var removeIndex = lbContainerList.SelectedIndex;
 
             if (removeIndex != -1)
             {
-                logicServices.TotalContainers.RemoveAt(removeIndex);
-                visualContainerList.RemoveAt(removeIndex);
+                logicServices.RemoveContainer(removeIndex);
 
                 lbContainerUpdate();
             }
@@ -93,16 +68,50 @@ namespace ContainerTransport
         private void lbContainerUpdate()
         {
             lbContainerList.Items.Clear();
-            foreach (Container container in visualContainerList)
+            foreach (Container container in logicServices.DockedContainers)
             {
                 lbContainerList.Items.Add(container.ToString());
             }
+
+            lbUpdateShipInfo();
         }
 
+        /// <summary>
+        /// Update ship and container info to the form
+        /// </summary>
         private void lbUpdateShipInfo()
+        {
+            //Total containers
+            lblTotalContainers.Text = logicServices.DockedContainers.Count().ToString();
+
+            //TotalWeight of containers
+            lblTotalContainerWeight.Text = logicServices.DockedContainersWeight.ToString();
+
+            //Max weight of containers
+            lblShipMaxWeight.Text = logicServices.ship.MaxWeight.ToString();
+
+            //min weight of containers
+            lblShipMinWeight.Text = (logicServices.ship.MaxWeight / 2).ToString();
+        }
+
+        /// <summary>
+        /// start the algoritem
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnStart_Click(object sender, EventArgs e)
         {
 
         }
 
+        /// <summary>
+        /// Reset the application and its content
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnClearAll_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
+        }
     }
 }
