@@ -33,11 +33,31 @@ namespace ContainerTransport
             {
                 Selection selection = new Selection
                 {
-                    Id = i
+                    Place = i
                 };
 
                 Selections.Add(selection);
             }
+        }
+
+        public decimal CalculateBalance()
+        {
+            decimal selectionRowTop = 0;
+            decimal selectionRowBottom = 0;
+
+            for (int i = 0; i < 8; i++)
+            {
+                if (i == 0 || i == 2 || i == 4 || i == 6)
+                {
+                    selectionRowTop += Selections[i].SelectionWeight;
+                }
+                else
+                {
+                    selectionRowBottom += Selections[i].SelectionWeight;
+                }
+            }
+
+            return Balance = (selectionRowBottom - selectionRowTop) / selectionRowTop * 100;
         }
     
     }

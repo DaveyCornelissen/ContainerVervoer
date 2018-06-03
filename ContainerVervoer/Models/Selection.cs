@@ -10,12 +10,35 @@ namespace ContainerVervoer.Models
     public class Selection
     {
 
-        public int Id { get; set; }
+        public int Place { get; set; }
 
         public bool ContainsValue { get; set; }
 
         public decimal SelectionWeight { get; set; }
 
+        public decimal SelectionMaxweight { get; private set; } = 150000;
+
         public List<Container> Containers { get; set; } = new List<Container>();
+
+        public bool AddContainer(Container model)
+        {
+            if (model.Valuable && ContainsValue)
+                return false;
+
+            decimal _newWeight = model.Weight + SelectionWeight;
+
+            if (_newWeight <= SelectionMaxweight)
+            {
+                Containers.Add(model);
+                SelectionWeight = _newWeight;
+
+                if (model.Valuable)
+                    ContainsValue = true;
+
+                return true;
+            }
+
+            return false;
+        }
     }
 }

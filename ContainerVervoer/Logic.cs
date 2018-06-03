@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ContainerVervoer.Models;
 
 namespace ContainerTransport
 {
@@ -51,7 +52,6 @@ namespace ContainerTransport
             DockedContainersWeight -= DockedContainers[index].Weight;
 
             DockedContainers.RemoveAt(index);
-
         }
 
         /// <summary>
@@ -63,9 +63,8 @@ namespace ContainerTransport
             checkConditions();
 
 
-
-
-
+            //Puts the containers in place
+            PlaceContainers();
         }
 
         /// <summary>
@@ -92,15 +91,72 @@ namespace ContainerTransport
             _totalValuable = DockedContainers.FindAll(c => c.Valuable).Count;
 
             if (_totalValuable > 4)
-                throw new ExceptionHandler("There are to many valuable containers! There are current {0} and there are only 4 allowed on this ship", _totalValuable);
+                throw new ExceptionHandler(
+                    "There are to many valuable containers! There are current {0} and there are only 4 allowed on this ship",
+                    _totalValuable);
 
             //Check totalCooled containers
             _totalCooled = DockedContainers.FindAll(c => c.Cooled).Count;
 
-            if (_totalValuable >= 2 && _totalCooled >= 8 || _totalCooled > 10)
-                throw new ExceptionHandler("There are to many cooled containers! There are current {0} and you can only have at max 10 if there are no valuable containers. the total valuable containers are {1}", _totalCooled, _totalValuable);
+            if ((_totalValuable > 2 && _totalCooled > 10))
+                throw new ExceptionHandler(
+                    "There are to many cooled containers! There are current {0} and you can only have at max 10 if there are no valuable containers. the total valuable containers are {1}",
+                    _totalCooled, _totalValuable);
         }
 
-        private void 
+        private void PlaceContainers()
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                bool _containsValue = DockedContainers.Exists(c => c.Valuable);
+                bool _containsCooled = DockedContainers.Exists(c => c.Cooled);
+                bool _containsdefault = DockedContainers.Exists(c => c.Standard);
+
+                Selection selection = ship.Selections[i];
+
+                if (_containsValue && (selection.Place == 1 || selection.Place == 2 || selection.Place == 7 ||
+                    selection.Place == 8))
+                {
+                    List<Container> _tempValueContainers = DockedContainers.FindAll(c => c.Valuable);
+
+                    foreach (Container container in _tempValueContainers.ToList())
+                    {
+                        bool result = selection.AddContainer(container);
+
+                        if (result)
+                            _tempValueContainers.Remove(container);
+                    }
+                }
+
+                if (_containsCooled && (selection.Place == 1 || selection.Place == 2))
+                {
+                    List<Container> _tempCooledContainers = DockedContainers.FindAll(c => c.Cooled);
+
+                    foreach (Container container in _tempCooledContainers.ToList())
+                    {
+                        bool result = selection.AddContainer(container);
+
+                        if (result)
+                            _tempCooledContainers.Remove(container);
+                    }
+                }
+
+                if (_containsdefault)
+                {
+                    List<Container> _tempDefaultContainers = DockedContainers.FindAll(c => c.Cooled);
+
+                    foreach (Container container in _tempDefaultContainers.ToList())
+                    {
+                        bool result = selection.AddContainer(container);
+
+                        if (result)
+                            _tempDefaultContainers.Remove(container);
+                    }
+                }
+            }
+
+
+            ship.CalculateBalance();
+        }
     }
 }
