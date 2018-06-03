@@ -124,7 +124,10 @@ namespace ContainerTransport
                         bool result = selection.AddContainer(container);
 
                         if (result)
+                        {
                             _tempValueContainers.Remove(container);
+                            DockedContainers.Remove(container);
+                        }   
                     }
                 }
 
@@ -137,20 +140,26 @@ namespace ContainerTransport
                         bool result = selection.AddContainer(container);
 
                         if (result)
+                        {
                             _tempCooledContainers.Remove(container);
+                            DockedContainers.Remove(container);
+                        }
                     }
                 }
 
                 if (_containsdefault)
                 {
-                    List<Container> _tempDefaultContainers = DockedContainers.FindAll(c => c.Cooled);
+                    List<Container> _tempDefaultContainers = DockedContainers.FindAll(c => c.Standard);
 
                     foreach (Container container in _tempDefaultContainers.ToList())
                     {
                         bool result = selection.AddContainer(container);
 
                         if (result)
+                        {
                             _tempDefaultContainers.Remove(container);
+                            DockedContainers.Remove(container);
+                        }
                     }
                 }
             }
