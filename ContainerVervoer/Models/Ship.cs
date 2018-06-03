@@ -29,7 +29,7 @@ namespace ContainerTransport
         //create selections to the amount given by creating a ship
         private void CreateSelections(int total)
         {
-            for (int i = 0; i < total; i++)
+            for (int i = 1; i <= total; i++)
             {
                 Selection selection = new Selection
                 {

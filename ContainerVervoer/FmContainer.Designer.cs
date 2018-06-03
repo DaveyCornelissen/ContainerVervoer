@@ -66,6 +66,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.lblShipMaxWeight = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nbShipWeight)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -138,9 +139,9 @@
             // 
             // btnSetShip
             // 
-            this.btnSetShip.Location = new System.Drawing.Point(206, 17);
+            this.btnSetShip.Location = new System.Drawing.Point(206, 20);
             this.btnSetShip.Name = "btnSetShip";
-            this.btnSetShip.Size = new System.Drawing.Size(49, 20);
+            this.btnSetShip.Size = new System.Drawing.Size(80, 21);
             this.btnSetShip.TabIndex = 3;
             this.btnSetShip.Text = "Set";
             this.btnSetShip.UseVisualStyleBackColor = true;
@@ -241,6 +242,7 @@
             // gpContainerAdd
             // 
             this.gpContainerAdd.Controls.Add(this.nbContainerWeight);
+            this.gpContainerAdd.Controls.Add(this.label7);
             this.gpContainerAdd.Controls.Add(this.rbCooled);
             this.gpContainerAdd.Controls.Add(this.rbValuable);
             this.gpContainerAdd.Controls.Add(this.rbStandard);
@@ -279,7 +281,7 @@
             // rbCooled
             // 
             this.rbCooled.AutoSize = true;
-            this.rbCooled.Location = new System.Drawing.Point(192, 68);
+            this.rbCooled.Location = new System.Drawing.Point(192, 56);
             this.rbCooled.Name = "rbCooled";
             this.rbCooled.Size = new System.Drawing.Size(58, 17);
             this.rbCooled.TabIndex = 6;
@@ -289,7 +291,7 @@
             // rbValuable
             // 
             this.rbValuable.AutoSize = true;
-            this.rbValuable.Location = new System.Drawing.Point(101, 68);
+            this.rbValuable.Location = new System.Drawing.Point(101, 56);
             this.rbValuable.Name = "rbValuable";
             this.rbValuable.Size = new System.Drawing.Size(66, 17);
             this.rbValuable.TabIndex = 6;
@@ -300,7 +302,7 @@
             // 
             this.rbStandard.AutoSize = true;
             this.rbStandard.Checked = true;
-            this.rbStandard.Location = new System.Drawing.Point(10, 68);
+            this.rbStandard.Location = new System.Drawing.Point(10, 56);
             this.rbStandard.Name = "rbStandard";
             this.rbStandard.Size = new System.Drawing.Size(68, 17);
             this.rbStandard.TabIndex = 6;
@@ -310,7 +312,7 @@
             // 
             // btnRemoveContainer
             // 
-            this.btnRemoveContainer.Location = new System.Drawing.Point(125, 89);
+            this.btnRemoveContainer.Location = new System.Drawing.Point(72, 82);
             this.btnRemoveContainer.Name = "btnRemoveContainer";
             this.btnRemoveContainer.Size = new System.Drawing.Size(75, 23);
             this.btnRemoveContainer.TabIndex = 4;
@@ -320,7 +322,7 @@
             // 
             // btnAddContainer
             // 
-            this.btnAddContainer.Location = new System.Drawing.Point(211, 89);
+            this.btnAddContainer.Location = new System.Drawing.Point(153, 82);
             this.btnAddContainer.Name = "btnAddContainer";
             this.btnAddContainer.Size = new System.Drawing.Size(75, 23);
             this.btnAddContainer.TabIndex = 4;
@@ -476,6 +478,15 @@
             this.label4.TabIndex = 1;
             this.label4.Text = "Ship max weight:";
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(25, 87);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(40, 13);
+            this.label7.TabIndex = 6;
+            this.label7.Text = "Action:";
+            // 
             // FmContainer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -543,6 +554,7 @@
         private System.Windows.Forms.RichTextBox rtbProgramLog;
         private System.Windows.Forms.NumericUpDown nbShipWeight;
         private System.Windows.Forms.NumericUpDown nbContainerWeight;
+        private System.Windows.Forms.Label label7;
     }
 }
 

@@ -30,6 +30,14 @@ namespace ContainerTransport
 
             btnAddContainer.Enabled = true;
             btnStart.Enabled = true;
+
+            //show ship is created
+            rtbProgramLog.Clear();
+
+            rtbProgramLog.Text = String.Format("You succesfully created the ship with the weight of {0} kg!",
+                nbShipWeight.Value);
+
+            lbUpdateShipInfo();
         }
 
         private void btnAddContainer_Click(object sender, EventArgs e)
@@ -101,7 +109,16 @@ namespace ContainerTransport
         /// <param name="e"></param>
         private void btnStart_Click(object sender, EventArgs e)
         {
+            try
+            {
+                logicServices.StartAlgoritem();
+            }
+            catch (ExceptionHandler exception)
+            {
+                rtbProgramLog.Clear();
 
+                rtbProgramLog.Text = exception.Message;
+            }
         }
 
         /// <summary>

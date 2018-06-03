@@ -20,6 +20,13 @@ namespace ContainerTransport
             ship = new Ship(maxWeight, 8);
         }
 
+        /// <summary>
+        /// Add a container to the docked containers list
+        /// </summary>
+        /// <param name="weight"></param>
+        /// <param name="standard"></param>
+        /// <param name="valuable"></param>
+        /// <param name="Cooled"></param>
         public void AddContainer(decimal weight, bool standard, bool valuable, bool Cooled)
         {
             Container newContainer = new Container
@@ -35,15 +42,36 @@ namespace ContainerTransport
             DockedContainersWeight += newContainer.Weight;
         }
 
+        /// <summary>
+        /// Remove a container from the docked containers
+        /// </summary>
+        /// <param name="index"></param>
         public void RemoveContainer(int index)
         {
             DockedContainersWeight -= DockedContainers[index].Weight;
 
             DockedContainers.RemoveAt(index);
+
         }
 
+        /// <summary>
+        /// The actual algoritem
+        /// </summary>
+        public void StartAlgoritem()
+        {
+            //a default check
+            checkConditions();
 
-        public void checkConditions()
+
+
+
+
+        }
+
+        /// <summary>
+        /// A default check if the algoritem conditions are met.
+        /// </summary>
+        private void checkConditions()
         {
             int _totalValuable = 0;
             int _totalCooled = 0;
@@ -58,7 +86,7 @@ namespace ContainerTransport
             if (DockedContainersWeight > ship.MaxWeight)
                 throw new ExceptionHandler(
                     "The total docked containers weight is higher than the maximum ship weight of {0} other wise it will capsize!",
-                    ship.MinWeight);
+                    ship.MaxWeight);
 
             //check totalValuable containers
             _totalValuable = DockedContainers.FindAll(c => c.Valuable).Count;
@@ -69,8 +97,10 @@ namespace ContainerTransport
             //Check totalCooled containers
             _totalCooled = DockedContainers.FindAll(c => c.Cooled).Count;
 
-            if (_totalCooled)
-                throw new ExceptionHandler("");
+            if (_totalValuable >= 2 && _totalCooled >= 8 || _totalCooled > 10)
+                throw new ExceptionHandler("There are to many cooled containers! There are current {0} and you can only have at max 10 if there are no valuable containers. the total valuable containers are {1}", _totalCooled, _totalValuable);
         }
+
+        private void 
     }
 }
