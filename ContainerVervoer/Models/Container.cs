@@ -26,6 +26,10 @@ namespace ContainerTransport
             MinWeight = 4000;
         }
 
+        /// <summary>
+        /// Contvert this class to string so it can be viewed by a listbox
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return "Container weight: " + Weight + " Standard: " + Standard + " Valuable: " + Valuable + " Cooled: " +

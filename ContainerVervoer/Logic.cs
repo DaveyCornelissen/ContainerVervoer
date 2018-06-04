@@ -137,10 +137,8 @@ namespace ContainerTransport
                     foreach (Container container in _tempValueContainers.ToList())
                     {
                         //Send the container too the selection class and try's to add the container to the list of the selection.
-                        bool result = selection.AddContainer(container);
-
                         //if result is true then the placed container can be deleted.
-                        if (result)
+                        if (selection.AddContainer(container))
                         {
                             _tempValueContainers.Remove(container);
                             DockedContainers.Remove(container);
@@ -158,10 +156,8 @@ namespace ContainerTransport
                     foreach (Container container in _tempCooledContainers.ToList())
                     {
                         //Send the container too the selection class and try's to add the container to the list of the selection.
-                        bool result = selection.AddContainer(container);
-
                         //if result is true then the placed container can be deleted.
-                        if (result)
+                        if (selection.AddContainer(container))
                         {
                             _tempCooledContainers.Remove(container);
                             DockedContainers.Remove(container);
@@ -179,10 +175,8 @@ namespace ContainerTransport
                     foreach (Container container in _tempDefaultContainers.ToList())
                     {
                         //Send the container too the selection class and try's to add the container to the list of the selection.
-                        bool result = selection.AddContainer(container);
-
                         //if result is true then the placed container can be deleted.
-                        if (result)
+                        if (selection.AddContainer(container))
                         {
                             _tempDefaultContainers.Remove(container);
                             DockedContainers.Remove(container);
@@ -211,16 +205,9 @@ namespace ContainerTransport
             //foreach through all the selections on the lowest side
             foreach (Selection _currentSelection in _LSelection)
             {   
-                //checks again if the balance is below 20%
-                if (ship.CalculateBalance())
-                    break;
                 //foreach through all the selections of the heaviest side
                 foreach (Selection _HSSelection in _HSelection)
                 {
-                    //checks again if the balance is below 20%
-                    if (ship.CalculateBalance())
-                        break;
-
                     foreach (Container container in _HSSelection.Containers.ToList())
                     {
                         //checks again if the balance is below 20%
@@ -233,9 +220,8 @@ namespace ContainerTransport
                         if (container.Cooled && !(_currentSelection.Place == 1 || _currentSelection.Place == 2))
                             continue;
                         //check if the container fits in its new selection
-                        bool result = _currentSelection.AddContainer(container);
                         //if result is true then delete out _HSSelection
-                        if (result)
+                        if (_currentSelection.AddContainer(container))
                             _HSSelection.DeleteContainer(container);
                     }
                 }

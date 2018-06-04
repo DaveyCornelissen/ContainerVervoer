@@ -39,7 +39,7 @@ namespace ContainerTransport
             //show ship is created
             rtbProgramLog.Clear();
 
-            rtbProgramLog.Text = String.Format("You succesfully created the ship with the weight of {0} kg!",
+            rtbProgramLog.Text = String.Format("You successfully created the ship with the weight of {0} kg!",
                 nbShipWeight.Value);
 
             lbUpdateShipInfo();
@@ -68,15 +68,21 @@ namespace ContainerTransport
         {
             var removeIndex = lbContainerList.SelectedIndex;
 
-            if (removeIndex != -1)
+            try
             {
-                logicServices.RemoveContainer(removeIndex);
+                if (removeIndex != -1)
+                {
+                    logicServices.RemoveContainer(removeIndex);
 
-                lbContainerUpdate();
+                    lbContainerUpdate();
+                }
+                else
+                {
+                    MessageBox.Show("Please select a container first!");
+                }
             }
-            else
+            catch
             {
-                MessageBox.Show("Please select a container first!");
             }
         }
 
@@ -124,9 +130,6 @@ namespace ContainerTransport
         {
             try
             {
-                btnAddContainer.Enabled = false;
-                btnRemoveContainer.Enabled = false;
-
                //Starts the algoritem
                logicServices.StartAlgoritem();
                //adds the result to the view
