@@ -24,6 +24,11 @@ namespace ContainerTransport
             btnStart.Enabled = false;
         }
 
+        /// <summary>
+        /// Set the ship weight and also creates the logic for the ship. and enables the start and add container buttons
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSetShip_Click(object sender, EventArgs e)
         {
             logicServices = new Logic(nbShipWeight.Value);
@@ -40,6 +45,11 @@ namespace ContainerTransport
             lbUpdateShipInfo();
         }
 
+        /// <summary>
+        /// Adds the container to the docked container list.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAddContainer_Click(object sender, EventArgs e)
         {
             //add containers to logicServices list
@@ -100,6 +110,9 @@ namespace ContainerTransport
 
             //min weight of containers
             lblShipMinWeight.Text = (logicServices.ship.MaxWeight / 2).ToString();
+
+            //The balance of the ship
+            lblShipBalance.Text = logicServices.ship.Balance.ToString();
         }
 
         /// <summary>
@@ -111,13 +124,67 @@ namespace ContainerTransport
         {
             try
             {
-                logicServices.StartAlgoritem();
+               //Starts the algoritem
+               logicServices.StartAlgoritem();
+               //adds the result to the view
+               SetSelectionList(logicServices.ship);
             }
             catch (ExceptionHandler exception)
             {
                 rtbProgramLog.Clear();
-
                 rtbProgramLog.Text = exception.Message;
+            }
+        }
+
+        /// <summary>
+        /// Adds the result of the algoritem to the lists where the containers belong.
+        /// </summary>
+        /// <param name="ship"></param>
+        private void SetSelectionList(Ship ship)
+        {
+            //Clear all selection lists before filling them
+            lbContainerSection1.Items.Clear();
+            lbContainerSection2.Items.Clear();
+            lbContainerSection3.Items.Clear();
+            lbContainerSection4.Items.Clear();
+            lbContainerSection5.Items.Clear();
+            lbContainerSection6.Items.Clear();
+            lbContainerSection7.Items.Clear();
+            lbContainerSection8.Items.Clear();
+
+            foreach (var selection in ship.Selections)
+            {
+                foreach (Container container in selection.Containers)
+                {
+                    switch (selection.Place)
+                    {
+                        case 1:
+                            lbContainerSection1.Items.Add(container.ToString());
+                            break;
+                        case 2:
+                            lbContainerSection2.Items.Add(container.ToString());
+                            break;
+                        case 3:
+                            lbContainerSection3.Items.Add(container.ToString());
+                            break;
+                        case 4:
+                            lbContainerSection4.Items.Add(container.ToString());
+                            break;
+                        case 5:
+                            lbContainerSection5.Items.Add(container.ToString());
+                            break;
+                        case 6:
+                            lbContainerSection6.Items.Add(container.ToString());
+                            break;
+                        case 7:
+                            lbContainerSection7.Items.Add(container.ToString());
+                            break;
+                        case 8:
+                            lbContainerSection8.Items.Add(container.ToString());
+                            break;
+                    }
+                    
+                }
             }
         }
 

@@ -65,6 +65,22 @@ namespace ContainerTransport
 
             //Puts the containers in place
             PlaceContainers();
+
+            //Calculate the current balance of the ship
+            bool isBalanced = ship.CalculateBalance();
+           
+
+            if (isBalanced)
+            {
+                while (isBalanced)
+                {
+                    BalanceShip();
+                }
+            }
+            else
+            {
+                throw new ExceptionHandler("Oops something went wrong with balacing the ship! Please restart!");
+            }
         }
 
         /// <summary>
@@ -104,25 +120,36 @@ namespace ContainerTransport
                     _totalCooled, _totalValuable);
         }
 
+        /// <summary>
+        /// Places the docked containers to the right selections.
+        /// </summary>
         private void PlaceContainers()
         {
+            //Loops through every selection of the ship and try to fit the containers
             for (int i = 0; i < 8; i++)
             {
+                //Check if there are containers in the docking list and returns true or false 
                 bool _containsValue = DockedContainers.Exists(c => c.Valuable);
                 bool _containsCooled = DockedContainers.Exists(c => c.Cooled);
                 bool _containsdefault = DockedContainers.Exists(c => c.Standard);
 
+                //select the current selection by the for loop Index
                 Selection selection = ship.Selections[i];
 
+                //Check if there are valuable containers and if the selection places are met
                 if (_containsValue && (selection.Place == 1 || selection.Place == 2 || selection.Place == 7 ||
                     selection.Place == 8))
                 {
+                    //Find all the valuable containers
                     List<Container> _tempValueContainers = DockedContainers.FindAll(c => c.Valuable);
 
+                    //Foreach through the valuable container list
                     foreach (Container container in _tempValueContainers.ToList())
-                    {
+                    {   
+                        //Send the container too the selection class and try's to add the container to the list of the selection.
                         bool result = selection.AddContainer(container);
 
+                        //if result is true then the placed container can be deleted.
                         if (result)
                         {
                             _tempValueContainers.Remove(container);
@@ -130,15 +157,19 @@ namespace ContainerTransport
                         }   
                     }
                 }
-
+                //Check if there are cooled containers and if the selection places are met
                 if (_containsCooled && (selection.Place == 1 || selection.Place == 2))
                 {
+                    //Find all the cooled containers
                     List<Container> _tempCooledContainers = DockedContainers.FindAll(c => c.Cooled);
 
+                    //Foreach through the cooled container list
                     foreach (Container container in _tempCooledContainers.ToList())
                     {
+                        //Send the container too the selection class and try's to add the container to the list of the selection.
                         bool result = selection.AddContainer(container);
 
+                        //if result is true then the placed container can be deleted.
                         if (result)
                         {
                             _tempCooledContainers.Remove(container);
@@ -146,15 +177,19 @@ namespace ContainerTransport
                         }
                     }
                 }
-
+                //Check if there are default containers
                 if (_containsdefault)
                 {
+                    //Find all the default containers
                     List<Container> _tempDefaultContainers = DockedContainers.FindAll(c => c.Standard);
 
+                    //Foreach through the default container list
                     foreach (Container container in _tempDefaultContainers.ToList())
                     {
+                        //Send the container too the selection class and try's to add the container to the list of the selection.
                         bool result = selection.AddContainer(container);
 
+                        //if result is true then the placed container can be deleted.
                         if (result)
                         {
                             _tempDefaultContainers.Remove(container);
@@ -163,9 +198,22 @@ namespace ContainerTransport
                     }
                 }
             }
+        }
+
+        private void BalanceShip()
+        {
+            Selection _heightsContainerWeight = ship.Selections.OrderBy(s => s.SelectionWeight).First();
+
+            for (int i = 0; i < ship.Selections.Count; i++)
+            {
+                if (ship.CalculateBalance())
+                    break;
+                
 
 
-            ship.CalculateBalance();
+            }
+
+
         }
     }
 }

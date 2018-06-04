@@ -40,24 +40,34 @@ namespace ContainerTransport
             }
         }
 
-        public decimal CalculateBalance()
+        public bool CalculateBalance()
         {
-            decimal selectionRowTop = 0;
-            decimal selectionRowBottom = 0;
+            decimal[] _selectionWeight = new decimal[2];
 
             for (int i = 0; i < 8; i++)
             {
                 if (i == 0 || i == 2 || i == 4 || i == 6)
                 {
-                    selectionRowTop += Selections[i].SelectionWeight;
+                    _selectionWeight[0] += Selections[i].SelectionWeight;
                 }
                 else
                 {
-                    selectionRowBottom += Selections[i].SelectionWeight;
+                    _selectionWeight[1] += Selections[i].SelectionWeight;
                 }
             }
 
-            return Balance = (selectionRowBottom - selectionRowTop) / selectionRowTop * 100;
+            decimal HeightsNumber = _selectionWeight.Max();
+
+            decimal LowestNumber = _selectionWeight.Min();
+
+            decimal Balance = (LowestNumber - HeightsNumber) / HeightsNumber * 100;
+
+            if (Balance <= -20)
+            {
+                return true;
+            }
+
+            return false;
         }
     
     }

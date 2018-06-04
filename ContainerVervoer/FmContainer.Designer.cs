@@ -46,6 +46,7 @@
             this.lbContainerSection1 = new System.Windows.Forms.ListBox();
             this.gpContainerAdd = new System.Windows.Forms.GroupBox();
             this.nbContainerWeight = new System.Windows.Forms.NumericUpDown();
+            this.label7 = new System.Windows.Forms.Label();
             this.rbCooled = new System.Windows.Forms.RadioButton();
             this.rbValuable = new System.Windows.Forms.RadioButton();
             this.rbStandard = new System.Windows.Forms.RadioButton();
@@ -66,7 +67,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.lblShipMaxWeight = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nbShipWeight)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -176,6 +176,7 @@
             // lbContainerSection7
             // 
             this.lbContainerSection7.FormattingEnabled = true;
+            this.lbContainerSection7.HorizontalScrollbar = true;
             this.lbContainerSection7.Location = new System.Drawing.Point(631, 19);
             this.lbContainerSection7.Name = "lbContainerSection7";
             this.lbContainerSection7.Size = new System.Drawing.Size(201, 121);
@@ -184,6 +185,7 @@
             // lbContainerSection8
             // 
             this.lbContainerSection8.FormattingEnabled = true;
+            this.lbContainerSection8.HorizontalScrollbar = true;
             this.lbContainerSection8.Location = new System.Drawing.Point(631, 146);
             this.lbContainerSection8.Name = "lbContainerSection8";
             this.lbContainerSection8.Size = new System.Drawing.Size(201, 121);
@@ -192,6 +194,7 @@
             // lbContainerSection5
             // 
             this.lbContainerSection5.FormattingEnabled = true;
+            this.lbContainerSection5.HorizontalScrollbar = true;
             this.lbContainerSection5.Location = new System.Drawing.Point(424, 19);
             this.lbContainerSection5.Name = "lbContainerSection5";
             this.lbContainerSection5.Size = new System.Drawing.Size(201, 121);
@@ -200,6 +203,7 @@
             // lbContainerSection6
             // 
             this.lbContainerSection6.FormattingEnabled = true;
+            this.lbContainerSection6.HorizontalScrollbar = true;
             this.lbContainerSection6.Location = new System.Drawing.Point(424, 146);
             this.lbContainerSection6.Name = "lbContainerSection6";
             this.lbContainerSection6.Size = new System.Drawing.Size(201, 121);
@@ -208,6 +212,7 @@
             // lbContainerSection3
             // 
             this.lbContainerSection3.FormattingEnabled = true;
+            this.lbContainerSection3.HorizontalScrollbar = true;
             this.lbContainerSection3.Location = new System.Drawing.Point(217, 19);
             this.lbContainerSection3.Name = "lbContainerSection3";
             this.lbContainerSection3.Size = new System.Drawing.Size(201, 121);
@@ -216,6 +221,7 @@
             // lbContainerSection4
             // 
             this.lbContainerSection4.FormattingEnabled = true;
+            this.lbContainerSection4.HorizontalScrollbar = true;
             this.lbContainerSection4.Location = new System.Drawing.Point(217, 146);
             this.lbContainerSection4.Name = "lbContainerSection4";
             this.lbContainerSection4.Size = new System.Drawing.Size(201, 121);
@@ -225,6 +231,7 @@
             // 
             this.lbContainerSection2.BackColor = System.Drawing.SystemColors.Window;
             this.lbContainerSection2.FormattingEnabled = true;
+            this.lbContainerSection2.HorizontalScrollbar = true;
             this.lbContainerSection2.Location = new System.Drawing.Point(10, 146);
             this.lbContainerSection2.Name = "lbContainerSection2";
             this.lbContainerSection2.Size = new System.Drawing.Size(201, 121);
@@ -234,6 +241,7 @@
             // 
             this.lbContainerSection1.BackColor = System.Drawing.SystemColors.Window;
             this.lbContainerSection1.FormattingEnabled = true;
+            this.lbContainerSection1.HorizontalScrollbar = true;
             this.lbContainerSection1.Location = new System.Drawing.Point(10, 19);
             this.lbContainerSection1.Name = "lbContainerSection1";
             this.lbContainerSection1.Size = new System.Drawing.Size(201, 121);
@@ -277,6 +285,15 @@
             0,
             0,
             0});
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(25, 87);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(40, 13);
+            this.label7.TabIndex = 6;
+            this.label7.Text = "Action:";
             // 
             // rbCooled
             // 
@@ -477,15 +494,6 @@
             this.label4.Size = new System.Drawing.Size(87, 13);
             this.label4.TabIndex = 1;
             this.label4.Text = "Ship max weight:";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(25, 87);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(40, 13);
-            this.label7.TabIndex = 6;
-            this.label7.Text = "Action:";
             // 
             // FmContainer
             // 

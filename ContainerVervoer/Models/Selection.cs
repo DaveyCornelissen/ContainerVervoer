@@ -40,5 +40,16 @@ namespace ContainerVervoer.Models
 
             return false;
         }
+
+        public bool DeleteContainer(Container model)
+        {
+            var deleted = Containers.Remove(model);
+
+            if (!deleted) return false;
+
+            SelectionWeight -= model.Weight;
+
+            return true;
+        }
     }
 }
