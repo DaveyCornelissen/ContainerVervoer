@@ -100,7 +100,7 @@ namespace ContainerTransport
         private void lbUpdateShipInfo()
         {
             //Total containers
-            lblTotalContainers.Text = logicServices.DockedContainers.Count().ToString();
+            lblTotalContainers.Text = lbContainerList.Items.Count.ToString();
 
             //TotalWeight of containers
             lblTotalContainerWeight.Text = logicServices.DockedContainersWeight.ToString();
@@ -124,6 +124,9 @@ namespace ContainerTransport
         {
             try
             {
+                btnAddContainer.Enabled = false;
+                btnRemoveContainer.Enabled = false;
+
                //Starts the algoritem
                logicServices.StartAlgoritem();
                //adds the result to the view

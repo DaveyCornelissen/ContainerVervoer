@@ -39,7 +39,6 @@ namespace ContainerTransport
             };
 
             DockedContainers.Add(newContainer);
-
             DockedContainersWeight += newContainer.Weight;
         }
 
@@ -50,7 +49,6 @@ namespace ContainerTransport
         public void RemoveContainer(int index)
         {
             DockedContainersWeight -= DockedContainers[index].Weight;
-
             DockedContainers.RemoveAt(index);
         }
 
@@ -61,7 +59,6 @@ namespace ContainerTransport
         {
             //a default check
             checkConditions();
-
 
             //Puts the containers in place
             PlaceContainers();
@@ -74,11 +71,6 @@ namespace ContainerTransport
                     BalanceShip();
                 }
             }
-
-//            else
-//            {
-//                throw new ExceptionHandler("Oops something went wrong with balancing the ship! Please restart!");
-//            }
         }
 
         /// <summary>
@@ -200,46 +192,53 @@ namespace ContainerTransport
             }
         }
 
+        /// <summary>
+        /// Balance the ship if needed
+        /// </summary>
         private void BalanceShip()
         {
             Enum Side;
-
+            //Gets the weight of the left and right side
             decimal _leftWeight = ship.GetTotalSides().Item1; //left
             decimal _rightWeight = ship.GetTotalSides().Item2; //right
 
+            //Decides which side is the most heaviest
             Side = _leftWeight > _rightWeight ? Selection.RowSide.left : Selection.RowSide.right;
-
+            //Finds all the selections of each sides
             List<Selection> _HSelection = ship.Selections.FindAll(s => s.Side == (Selection.RowSide) Side);
-
             List<Selection> _LSelection = ship.Selections.FindAll(s => s.Side != (Selection.RowSide) Side);
 
+            //foreach through all the selections on the lowest side
             foreach (Selection _currentSelection in _LSelection)
-            {
+            {   
+                //checks again if the balance is below 20%
                 if (ship.CalculateBalance())
                     break;
-
+                //foreach through all the selections of the heaviest side
                 foreach (Selection _HSSelection in _HSelection)
                 {
+                    //checks again if the balance is below 20%
                     if (ship.CalculateBalance())
                         break;
 
                     foreach (Container container in _HSSelection.Containers.ToList())
                     {
+                        //checks again if the balance is below 20%
                         if (ship.CalculateBalance())
                             break;
+                        //if container is equal to valuable then skip
                         if (container.Valuable)
                             continue;
+                        //if container is cooled and the current selection place is not 1 or 2 then skip
                         if (container.Cooled && !(_currentSelection.Place == 1 || _currentSelection.Place == 2))
                             continue;
-
+                        //check if the container fits in its new selection
                         bool result = _currentSelection.AddContainer(container);
-
+                        //if result is true then delete out _HSSelection
                         if (result)
                             _HSSelection.DeleteContainer(container);
                     }
                 }
-
-               
             }
         }
     }

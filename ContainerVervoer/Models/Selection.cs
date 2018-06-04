@@ -28,6 +28,11 @@ namespace ContainerVervoer.Models
             right
         }
 
+        /// <summary>
+        /// Adds the container but first do some checks
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>if the placement is succesfull</returns>
         public bool AddContainer(Container model)
         {
             if (model.Valuable && ContainsValue)
@@ -49,6 +54,11 @@ namespace ContainerVervoer.Models
             return false;
         }
 
+        /// <summary>
+        /// Delete the container out of the selection
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public bool DeleteContainer(Container model)
         {
             var deleted = Containers.Remove(model);

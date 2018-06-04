@@ -26,7 +26,10 @@ namespace ContainerTransport
             CreateSelections(totalSelections);
         }
 
-        ///create selections to the amount given by creating a ship
+        /// <summary>
+        /// create selections to the amount given by creating a ship
+        /// </summary>
+        /// <param name="total"></param>
         private void CreateSelections(int total)
         {
             for (int i = 1; i <= total; i++)
@@ -49,6 +52,10 @@ namespace ContainerTransport
             }
         }
 
+        /// <summary>
+        /// Gets the total weight of the two sides
+        /// </summary>
+        /// <returns>Totalweightleft, TotalweightRight</returns>
         public (decimal, decimal) GetTotalSides()
         {
             decimal[] _selectionWeight = new decimal[2];
@@ -66,32 +73,32 @@ namespace ContainerTransport
             }
 
             decimal TotalLeft = _selectionWeight[0];
-
             decimal TotalRight = _selectionWeight[1];
 
             return (TotalLeft, TotalRight);
         }
 
+        /// <summary>
+        /// Calculate the balance of the ship.
+        /// </summary>
+        /// <returns></returns>
         public bool CalculateBalance()
         {
-            
-
             decimal[] _side = new decimal[2];
-
             _side[0] = GetTotalSides().Item1; //left
             _side[1] = GetTotalSides().Item2; //right
 
             decimal HeightsNumber = _side.Max();
-
             decimal LowestNumber = _side.Min();
 
-            decimal Balance = (LowestNumber - HeightsNumber) / HeightsNumber * 100;
+            //Calculate the current balance
+            decimal _balance = (LowestNumber - HeightsNumber) / HeightsNumber * 100;
 
-            if (Balance >= -20)
+            if (_balance >= -20)
             {
+                Balance = _balance;
                 return true;
             }
-
             return false;
         }
     
