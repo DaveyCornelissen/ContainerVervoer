@@ -128,6 +128,9 @@ namespace ContainerTransport
                logicServices.StartAlgoritem();
                //adds the result to the view
                SetSelectionList(logicServices.ship);
+               
+               //Update ship info after placement
+               lbUpdateShipInfo();
             }
             catch (ExceptionHandler exception)
             {

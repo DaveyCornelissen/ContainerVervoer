@@ -12,6 +12,8 @@ namespace ContainerVervoer.Models
 
         public int Place { get; set; }
 
+        public RowSide Side { get; set; }
+
         public bool ContainsValue { get; set; }
 
         public decimal SelectionWeight { get; set; }
@@ -19,6 +21,12 @@ namespace ContainerVervoer.Models
         public decimal SelectionMaxweight { get; private set; } = 150000;
 
         public List<Container> Containers { get; set; } = new List<Container>();
+
+        public enum RowSide
+        {
+            left,
+            right
+        }
 
         public bool AddContainer(Container model)
         {

@@ -26,7 +26,7 @@ namespace ContainerTransport
             CreateSelections(totalSelections);
         }
 
-        //create selections to the amount given by creating a ship
+        ///create selections to the amount given by creating a ship
         private void CreateSelections(int total)
         {
             for (int i = 1; i <= total; i++)
@@ -36,33 +36,58 @@ namespace ContainerTransport
                     Place = i
                 };
 
+                if (i == 1 || i == 3 || i == 5 || i == 7)
+                {
+                    selection.Side = Selection.RowSide.right;
+                }
+                else
+                {
+                    selection.Side = Selection.RowSide.left;
+                }
+
                 Selections.Add(selection);
             }
         }
 
-        public bool CalculateBalance()
+        public (decimal, decimal) GetTotalSides()
         {
             decimal[] _selectionWeight = new decimal[2];
 
-            for (int i = 0; i < 8; i++)
+            foreach (Selection selection in Selections)
             {
-                if (i == 0 || i == 2 || i == 4 || i == 6)
+                if (selection.Side == Selection.RowSide.left)
                 {
-                    _selectionWeight[0] += Selections[i].SelectionWeight;
+                    _selectionWeight[0] += selection.SelectionWeight;
                 }
                 else
                 {
-                    _selectionWeight[1] += Selections[i].SelectionWeight;
+                    _selectionWeight[1] += selection.SelectionWeight;
                 }
             }
 
-            decimal HeightsNumber = _selectionWeight.Max();
+            decimal TotalLeft = _selectionWeight[0];
 
-            decimal LowestNumber = _selectionWeight.Min();
+            decimal TotalRight = _selectionWeight[1];
+
+            return (TotalLeft, TotalRight);
+        }
+
+        public bool CalculateBalance()
+        {
+            
+
+            decimal[] _side = new decimal[2];
+
+            _side[0] = GetTotalSides().Item1; //left
+            _side[1] = GetTotalSides().Item2; //right
+
+            decimal HeightsNumber = _side.Max();
+
+            decimal LowestNumber = _side.Min();
 
             decimal Balance = (LowestNumber - HeightsNumber) / HeightsNumber * 100;
 
-            if (Balance <= -20)
+            if (Balance >= -20)
             {
                 return true;
             }

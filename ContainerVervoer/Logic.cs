@@ -67,20 +67,18 @@ namespace ContainerTransport
             PlaceContainers();
 
             //Calculate the current balance of the ship
-            bool isBalanced = ship.CalculateBalance();
-           
-
-            if (isBalanced)
+            if (!ship.CalculateBalance())
             {
-                while (isBalanced)
+                while (!ship.CalculateBalance())
                 {
                     BalanceShip();
                 }
             }
-            else
-            {
-                throw new ExceptionHandler("Oops something went wrong with balacing the ship! Please restart!");
-            }
+
+//            else
+//            {
+//                throw new ExceptionHandler("Oops something went wrong with balancing the ship! Please restart!");
+//            }
         }
 
         /// <summary>
@@ -138,14 +136,14 @@ namespace ContainerTransport
 
                 //Check if there are valuable containers and if the selection places are met
                 if (_containsValue && (selection.Place == 1 || selection.Place == 2 || selection.Place == 7 ||
-                    selection.Place == 8))
+                                       selection.Place == 8))
                 {
                     //Find all the valuable containers
                     List<Container> _tempValueContainers = DockedContainers.FindAll(c => c.Valuable);
 
                     //Foreach through the valuable container list
                     foreach (Container container in _tempValueContainers.ToList())
-                    {   
+                    {
                         //Send the container too the selection class and try's to add the container to the list of the selection.
                         bool result = selection.AddContainer(container);
 
@@ -154,9 +152,10 @@ namespace ContainerTransport
                         {
                             _tempValueContainers.Remove(container);
                             DockedContainers.Remove(container);
-                        }   
+                        }
                     }
                 }
+
                 //Check if there are cooled containers and if the selection places are met
                 if (_containsCooled && (selection.Place == 1 || selection.Place == 2))
                 {
@@ -177,6 +176,7 @@ namespace ContainerTransport
                         }
                     }
                 }
+
                 //Check if there are default containers
                 if (_containsdefault)
                 {
@@ -202,18 +202,45 @@ namespace ContainerTransport
 
         private void BalanceShip()
         {
-            Selection _heightsContainerWeight = ship.Selections.OrderBy(s => s.SelectionWeight).First();
+            Enum Side;
 
-            for (int i = 0; i < ship.Selections.Count; i++)
+            decimal _leftWeight = ship.GetTotalSides().Item1; //left
+            decimal _rightWeight = ship.GetTotalSides().Item2; //right
+
+            Side = _leftWeight > _rightWeight ? Selection.RowSide.left : Selection.RowSide.right;
+
+            List<Selection> _HSelection = ship.Selections.FindAll(s => s.Side == (Selection.RowSide) Side);
+
+            List<Selection> _LSelection = ship.Selections.FindAll(s => s.Side != (Selection.RowSide) Side);
+
+            foreach (Selection _currentSelection in _LSelection)
             {
                 if (ship.CalculateBalance())
                     break;
-                
 
+                foreach (Selection _HSSelection in _HSelection)
+                {
+                    if (ship.CalculateBalance())
+                        break;
 
+                    foreach (Container container in _HSSelection.Containers.ToList())
+                    {
+                        if (ship.CalculateBalance())
+                            break;
+                        if (container.Valuable)
+                            continue;
+                        if (container.Cooled && !(_currentSelection.Place == 1 || _currentSelection.Place == 2))
+                            continue;
+
+                        bool result = _currentSelection.AddContainer(container);
+
+                        if (result)
+                            _HSSelection.DeleteContainer(container);
+                    }
+                }
+
+               
             }
-
-
         }
     }
 }
